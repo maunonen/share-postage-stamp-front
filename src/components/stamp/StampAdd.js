@@ -1,9 +1,9 @@
 import React from 'react'
 
-const AddStamp = () => (
+const StampAdd = () => (
     <div>
         <h1>ADD STAMP</h1>
     </div>
 )
 
-export default AddStamp
+export default StampAdd

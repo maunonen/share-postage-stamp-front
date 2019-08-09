@@ -1,10 +1,46 @@
 import React from 'react'
- 
-const StampList = () => (
-<div>
-    <h1>Stamp List</h1>
-    <button>Add Stamp</button>
-</div>
-) 
+import StampItem from './StampItem'
+import { connect } from 'react-redux'
+import { getStampByOwner} from '../../actions/stamp'
 
-export default StampList
+
+ 
+class StampList extends React.Component {
+    constructor (props){
+        super(props)
+        this.state ={
+            error : props.stamps.error || ''
+        }
+    }
+
+    componentDidMount(){
+        // if user logged 
+        this.props.dispatch(getStampByOwner())
+    }
+
+    render () {
+        return (
+            <div>
+            { (this.props.error) && ( <h1> ${ this.props.error}`</h1>)}
+                <h1>Stamp List</h1>
+                { this.props.stamps.map((stamp) => (
+                    <StampItem 
+                        key={stamp._id}
+                        stamp={stamp}
+                    />   
+                ))}  
+            </div>
+        )
+    }
+}
+
+
+
+const mapStateToProps = (state) => {
+    return {
+        stamps : state.stamps.stamps, 
+        error : state.stamps.error
+    }
+}
+
+export default connect(mapStateToProps)(StampList)

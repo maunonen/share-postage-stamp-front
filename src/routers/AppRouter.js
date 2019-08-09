@@ -6,6 +6,7 @@ import AppConditions from '../components/AppConditions'
 import StampSend from '../components/stamp/StampSend'
 import AppContactPage from '../components/AppContactPage'
 import AppNotFoundPage from '../components/AppNotFoundPage'
+import StampForm from '../components/stamp/StampForm';
 
         /* <NavLink to="/rules">rules</NavLink> Conditions
         <NavLink to="/sendnew" >send new</NavLink> SendStamp
@@ -24,6 +25,7 @@ const AppRouter = () => (
                     <Route path="/rules" component={AppConditions}></Route>
                     <Route path="/dashboard"  component={AppDashBoard}></Route>
                     <Route path="/contactus" component={AppContactPage}></Route>
+                    <Route path="/addstamp" component={StampForm}></Route>
                     <Route path="/signout"></Route>
                     <Route component={AppNotFoundPage}></Route>
                 </Switch>

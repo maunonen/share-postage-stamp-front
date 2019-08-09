@@ -10,6 +10,8 @@ const AppHeader = () => (
         <NavLink to="/dashboard">dashboard</NavLink>
         <NavLink to="/contactus" exact={true}>contact us</NavLink>
         <NavLink to="/help">sign out</NavLink>
+        <NavLink to="/addstamp">Add Stamp</NavLink>
+
     </header>
 )
 

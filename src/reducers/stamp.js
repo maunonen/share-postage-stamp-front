@@ -8,17 +8,20 @@ DELETE_STAMP_FAILED,
 GET_STAMP_BY_ID_SUCCESS,
 GET_STAMP_BY_ID_FAILED,  
 GET_STAMP_BY_OWNER_SUCCESS,
-GET_STAMP_BY_OWNER_FAILED 
+GET_STAMP_BY_OWNER_FAILED, 
+STAMPS_LOADING 
 } from '../actions/stamp'
 
 function getInitinailState () {
     let stamps = []
     let error = ''
+    let loading = false
 
     // thinking about using storage storage
     return {
         stamps, 
-        error
+        error, 
+        loading
     }
 }
 
@@ -30,37 +33,59 @@ const stampReducer = ( state = stampDefaultStete, action) => {
     switch (action.type) {
         case ADD_STAMP_SUCCESS : 
             tempState = {
-                ...state, error : ''
+                ...state, 
+                error : '', 
+                loading : false
             }
             return tempState            
         case ADD_STAMP_FAILED:
              tempState = {
                 ...state,
-                error : action.error
+                error : action.error, 
+                loading : false
             }
             return tempState
         case EDIT_STAMP_SUCCESS:  
-            return 1
+            tempState = {
+                ...state, 
+                error : '', 
+                loading : false
+            }
+            return tempState
         case EDIT_STAMP_FAILED:  
-            return 1
+        tempState = {
+            ...state, 
+            error : action.error, 
+            loading : false
+        }
+        return tempState
         case DELETE_STAMP_SUCCESS: 
             tempState = {
                 ...state, 
-                error : ''
+                error : '', 
+                loading : false
             }
             return tempState
         case DELETE_STAMP_FAILED:  
             tempState = {
                 ...state, 
-                error : action.error
+                error : action.error, 
+                loading : false
             }
             return tempState
         case GET_STAMP_BY_ID_SUCCESS:
+        case STAMPS_LOADING : 
+        tempState = {
+            ...state, 
+            loading : true
+        }
+        return tempState
         case GET_STAMP_BY_ID_FAILED:
         case GET_STAMP_BY_OWNER_SUCCESS: 
             tempState = {
                 stamps : action.stamps, 
-                error : '' 
+                error : '', 
+                loading : false 
             }
             return tempState
         case GET_STAMP_BY_OWNER_FAILED:

@@ -3,23 +3,24 @@ import { addStamp , addStampSuccess } from '../../actions/stamp'
 import { connect } from 'react-redux';
 
 
- class StampForm extends React.Component {
+export default class StampForm extends React.Component {
 
     constructor (props){
-        super (props)
-        console.log('PROPS', props)
-
-        this.state = {
-            name : '', 
-            price : '', 
-            designer : '', 
-            designedAt : '', 
-            edition : 0, 
-            linkToImgUrl : '', 
-            owner : '' , 
-            error : props.error
-        } 
+        super(props)   
+        console.log('PROPS FROM ADD STAMP', this.props)
+            this.state = {
+                name :  this.props.stamp ? this.props.stamp.name: '' , 
+                price : this.props.stamp ? this.props.stamp.price: '' , 
+                designer : this.props.stamp ? this.props.stamp.designer: '' , 
+                designedAt : this.props.stamp ? this.props.stamp.designedAt: '' , 
+                edition : this.props.stamp ? this.props.stamp.edition: '' , 
+                linkToImgUrl : this.props.stamp ? this.props.stamp.linkToImgUrl: '' , 
+                owner : this.props.stamp ? this.props.stamp.owner: '', 
+                error : ''
+            } 
     }
+
+   
     
     onNameChange = (e) => {
         const name = e.target.value
@@ -52,7 +53,6 @@ import { connect } from 'react-redux';
     }
     onSubmit = (e) => {
         e.preventDefault() 
-        
         if ( ! this.state.name || !this.state.price || !this.state.owner) {
             this.setState ( ()  => ({ 
                 error : 'Please provide name, price and owner field'
@@ -68,18 +68,21 @@ import { connect } from 'react-redux';
                 linkToImgUrl : this.state.linkToImgUrl, 
                 owner : this.state.owner
             }
-            this.props.dispatch(addStamp(stampObj)) 
+            console.log('PROPS FROM SUBMIT', this.props)
+            this.props.onSubmit(stampObj)
         }
     }
 
 
     render () {
+
         return (
             <div>
-        <h1>Stamp Form</h1>
-        { (this.state.error || this.props.error) && ( <h1> `${ this.state.error} ${ this.props.error}`</h1>)}
-    
-        <form onSubmit = {this.onSubmit}>
+                <h1>Stamp Form</h1>
+                { (this.state.error || this.props.error) && ( <h1> `${ this.state.error} ${ this.props.error}`</h1>)}
+            <form 
+                onSubmit = {this.onSubmit}
+            >
             <input 
                 type="text"
                 placeholder="name"
@@ -117,20 +120,10 @@ import { connect } from 'react-redux';
                 value={this.state.owner}
                 onChange={ this.onOwnerChange}
             />
-            <button>Add button</button>
+            <button>Submit</button>
         </form>
     </div>
         )
     }
 }
     
-const mapStateToProps = (state) => {
-    //console.log(state)
-    //console.log( "Error", state.stamps.error)
-    return  {
-        stamps : state.stamps.stamps, 
-        error : state.stamps.error       
-    }
-}
-
-export default connect(mapStateToProps)(StampForm)

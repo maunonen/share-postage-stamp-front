@@ -8,13 +8,17 @@ import { getStampByOwner} from '../../actions/stamp'
 class StampList extends React.Component {
     constructor (props){
         super(props)
+        
         this.state ={
             error : props.stamps.error || ''
         }
     }
 
+
+
     componentDidMount(){
         // if user logged 
+        console.log('STAMP LIST DID MOUNT')
         this.props.dispatch(getStampByOwner())
     }
 

@@ -2,6 +2,7 @@ import React from 'react'
 import StampItem from './StampItem'
 import { connect } from 'react-redux'
 import { getStampByOwner} from '../../actions/stamp'
+import { removeStamp} from '../../actions/stamp'
 
 
  
@@ -18,8 +19,13 @@ class StampList extends React.Component {
 
     componentDidMount(){
         // if user logged 
-        console.log('STAMP LIST DID MOUNT')
+        console.log('STAMP LIST DID MOUNT', this.props.stamps)
+
         this.props.dispatch(getStampByOwner())
+    }
+    onRemoveStamp = (event) =>  {
+        console.log('STAMP ID', event.target.name)
+        this.props.dispatch(removeStamp(event.target.name))
     }
 
     render () {
@@ -31,6 +37,7 @@ class StampList extends React.Component {
                     <StampItem 
                         key={stamp._id}
                         stamp={stamp}
+                        remove={this.onRemoveStamp}
                     />   
                 ))}  
             </div>

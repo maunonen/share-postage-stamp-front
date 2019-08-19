@@ -9,6 +9,10 @@ const StampItem = (props) => (
         <h2>{ props.stamp.price}</h2>
         <h2>{ props.stamp.designer}</h2>
         <h2>{ props.stamp.designedAt}</h2>
+        <button 
+            onClick = { props.remove }
+            name={props.stamp._id} 
+            >Remove</button>
     </div>
 ) 
 export default StampItem

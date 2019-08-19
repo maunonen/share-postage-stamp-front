@@ -5,8 +5,9 @@ EDIT_STAMP_SUCCESS,
 EDIT_STAMP_FAILED,  
 DELETE_STAMP_SUCCESS, 
 DELETE_STAMP_FAILED,  
-GET_STAMP_BY_ID_SUCCESS,
-GET_STAMP_BY_ID_FAILED,  
+// get stamp by id on client side,  from array list that has been recieved from server by GET STAMP BY OWNER
+/* GET_STAMP_BY_ID_SUCCESS,
+GET_STAMP_BY_ID_FAILED,   */
 GET_STAMP_BY_OWNER_SUCCESS,
 GET_STAMP_BY_OWNER_FAILED, 
 STAMPS_LOADING 
@@ -73,14 +74,14 @@ const stampReducer = ( state = stampDefaultStete, action) => {
                 loading : false
             }
             return tempState
-        case GET_STAMP_BY_ID_SUCCESS:
+        //case GET_STAMP_BY_ID_SUCCESS:
         case STAMPS_LOADING : 
         tempState = {
             ...state, 
             loading : true
         }
         return tempState
-        case GET_STAMP_BY_ID_FAILED:
+        //case GET_STAMP_BY_ID_FAILED:
         case GET_STAMP_BY_OWNER_SUCCESS: 
             tempState = {
                 stamps : action.stamps, 

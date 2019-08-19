@@ -58,8 +58,8 @@ export const addStamp = ( stamp = {}) => {
         dispatch(stampsLoading())
         axios.post('/stamps', stamp).then( res => {
             dispatch(addStampSuccess())
-            console.log('ADD SUCCESS BEFORE GET STAMP')
             dispatch(getStampByOwner())
+            dispatch( push('/'))
         }).catch( (error) => {
             if (error.response) {
                 // The request was made and the server responded with a status code
@@ -88,8 +88,6 @@ export const addStamp = ( stamp = {}) => {
         dispatch(stampsLoading())
         axios.patch('/stamps/' + id, stamp).then( res => {
             dispatch(editStampSuccess())
-            console.log('PUSH', push  )
-            console.log('EDIT STAMP ACTION AXIOS editStamp')
             dispatch(getStampByOwner())
             dispatch( push('/'))
         }).catch( (error) => {
@@ -118,8 +116,9 @@ export const addStamp = ( stamp = {}) => {
 export const removeStamp  = ( id ) => {
     return dispatch => {
         dispatch(stampsLoading())
-        axios.delete('/stamps' + id).then( res => {
+        axios.delete('/stamps/' + id).then( res => {
             dispatch(deleteStampSuccess())
+            dispatch(getStampByOwner())
         }).catch( (error) => {
             if (error.response) {
                 // The request was made and the server responded with a status code

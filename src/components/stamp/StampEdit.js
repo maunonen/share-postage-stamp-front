@@ -18,15 +18,6 @@ import { editStamp, getStampByOwner}  from '../../actions/stamp'
 
         }
     }
-
-    componentDidMount (){
-        console.log('EDIT STAMP COMPONENT DID MOUNT')
-    }
-
-    componentWillUpdate () {
-        console.log('EDIT STAMP COMPONENT WILL UPDATE')
-    }
-
     
     render () {  
         console.log('EDIT STAMP RENDER', this.props.error)    

@@ -19,7 +19,7 @@ class StampList extends React.Component {
 
     componentDidMount(){
         // if user logged 
-        console.log('STAMP LIST DID MOUNT', this.props.stamps)
+        //console.log('STAMP LIST DID MOUNT', this.props.stamps)
 
         this.props.dispatch(getStampByOwner())
     }
@@ -31,7 +31,7 @@ class StampList extends React.Component {
     render () {
         return (
             <div>
-            { (this.props.error) && ( <h1> ${ this.props.error}`</h1>)}
+            { (this.props.error) && ( <h1>{this.props.error}</h1>)}
                 <h1>Stamp List</h1>
                 { this.props.stamps.map((stamp) => (
                     <StampItem 

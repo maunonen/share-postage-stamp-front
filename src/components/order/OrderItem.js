@@ -1,8 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const  OrderItem = () => (
+const  OrderItem = (props) => (
+    //console.log(props)
     <div>
-        <h1>Order Item</h1>
+        <Link to={ `/editOrder/${ props.order._id}`}>
+            <h2>{props.order.description}</h2>
+        </Link>
+            <h2>{props.order.status}</h2>
+            <h2>{props.order.address}</h2>
+            <h2>{props.order.client.username}</h2>
     </div>
 )
 

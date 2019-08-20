@@ -10,6 +10,7 @@ DELETE_STAMP_FAILED,
 GET_STAMP_BY_ID_FAILED,   */
 GET_STAMP_BY_OWNER_SUCCESS,
 GET_STAMP_BY_OWNER_FAILED, 
+GET_STAMP_BY_OWNER_EMPTY, 
 STAMPS_LOADING 
 } from '../actions/stamp'
 
@@ -90,6 +91,19 @@ const stampReducer = ( state = stampDefaultStete, action) => {
             }
             return tempState
         case GET_STAMP_BY_OWNER_FAILED:
+            tempState = {
+                ...state, 
+                error : action.error, 
+                loading : false
+            }
+            return tempState
+        case GET_STAMP_BY_OWNER_EMPTY : 
+            tempState = {
+                stamps : [], 
+                error : action.error, 
+                loading : false
+            }
+            return tempState
         default : 
             return state
     }

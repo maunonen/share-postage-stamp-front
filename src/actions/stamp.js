@@ -12,6 +12,7 @@ export const GET_STAMP_BY_ID_SUCCESS = "GET_STAMP_BY_ID_SUCCESS"
 export const GET_STAMP_BY_ID_FAILED = "GET_STAMP_BY_ID_FAILED"
 export const GET_STAMP_BY_OWNER_SUCCESS = "GET_STAMP_BY_OWNER_SUCCESS"
 export const GET_STAMP_BY_OWNER_FAILED = "GET_STAMP_BY_OWNER_FAILED"
+export const GET_STAMP_BY_OWNER_EMPTY = "GET_STAMP_BY_OWNER_EMPTY"
 export const STAMPS_LOADING = "STAMPS_LOADING"
 
  
@@ -34,7 +35,16 @@ export const getStampByOwner = () => {
             if (error.response) {
                 // The request was made and the server responded with a status code
                 // that falls out of the range of 2xx
-                dispatch( getStampByOwnerFailed( `${ error.response.data}. STATUS ${error.response.status}` ))
+                //console.log('ERROR STATUS STAMP', error.response.status)
+                
+                if (error.response.status === 401){
+                    dispatch( getStampByOwnerFailed('Please provide password and username'))
+                } else if (error.response.status === 404) {
+                    dispatch( dispatch( getStampByOwnerEmpty('404 nothing found')))
+                } else {
+                    dispatch( getStampByOwnerFailed( `${ error.response.data}. STATUS ${error.response.status}` ))
+                }
+                
               } else if (error.request) {
                 // The request was made but no response was received
                 // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
@@ -195,6 +205,12 @@ const getStampByOwnerSuccess = (stamps) => {
 const getStampByOwnerFailed = (error)=> {
     return {
         type : GET_STAMP_BY_OWNER_FAILED, 
+        error
+    }
+}
+const getStampByOwnerEmpty = (error)=> {
+    return {
+        type : GET_STAMP_BY_OWNER_EMPTY, 
         error
     }
 }

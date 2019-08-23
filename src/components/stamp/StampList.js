@@ -32,7 +32,15 @@ class StampList extends React.Component {
         return (
             <div>
             { (this.props.error) && ( <h1>{this.props.error}</h1>)}
-                <h1>Stamp List</h1>
+                <h2>Stamp List</h2>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>designer</th>
+                        <th>designedAt</th>
+                        <th>Action</th>
+                    </tr>
                 { this.props.stamps.map((stamp) => (
                     <StampItem 
                         key={stamp._id}
@@ -40,6 +48,7 @@ class StampList extends React.Component {
                         remove={this.onRemoveStamp}
                     />   
                 ))}  
+                </table>
             </div>
         )
     }

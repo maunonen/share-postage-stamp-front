@@ -2,17 +2,22 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const StampItem = (props) => (  
-    <div>
+    <tr>
+        <td>
         <Link to={ `/editstamp/${ props.stamp._id}`}>
-            <h2>{ props.stamp.name}</h2>
+            { props.stamp.name}
         </Link>
-        <h2>{ props.stamp.price}</h2>
-        <h2>{ props.stamp.designer}</h2>
-        <h2>{ props.stamp.designedAt}</h2>
-        <button 
+        </td>
+        <td>{ props.stamp.price}</td>
+        <td>{ props.stamp.designer}</td>
+        <td>{ props.stamp.designedAt}</td>
+        <td>
+            <button 
             onClick = { props.remove }
             name={props.stamp._id} 
-            >Remove</button>
-    </div>
+            >Remove</button></td>        
+    </tr>
+        
+    
 ) 
 export default StampItem

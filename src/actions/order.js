@@ -18,6 +18,35 @@ export const GET_ORDER_BY_OWNER_EMPTY = 'GET_ORDER_BY_OWNER_EMPTY'
 export const ORDER_LOADING = 'ORDER_LOADING'
 
 
+export const removeOrder = (id )  => {
+
+    return dispatch => {
+        dispatch(orderLoading()) 
+        axios.delete('/orders/' + id).then(res => {
+            dispatch(deleteOrderSuccess())
+            dispatch(getOrderByOwner())
+        }).catch(( error) => {
+            //console.log('')
+            //console.log('STATUS', error.response.status)
+            //console.log('STATUS ERROR', error.response.data)
+
+            if ( error.response.status === 401){ 
+                dispatch(deleteOrderFailed('Please provide password and username')) 
+            } else if (error.response.status === 404){
+                    dispatch(deleteOrderFailed('Order not found or you don\'t have permission.'))
+            } else if (error.response.status === 400 ) {
+                dispatch(deleteOrderFailed(''))
+            } else if ( error.request){
+                dispatch(deleteOrderFailed('Server not responce'))
+            } 
+            else {
+                dispatch(deleteOrderFailed(`Status: ${ error.response.status}. Message:${ error.response.data }`))
+            }
+        })
+    }
+
+}
+
 
 export const getOrderByOwner = ()  => {
     return dispatch  => {

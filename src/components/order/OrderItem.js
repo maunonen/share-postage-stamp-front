@@ -3,14 +3,22 @@ import { Link } from 'react-router-dom'
 
 const  OrderItem = (props) => (
     //console.log(props)
-    <div>
-        <Link to={ `/editOrder/${ props.order._id}`}>
-            <h2>{props.order.description}</h2>
-        </Link>
-            <h2>{props.order.status}</h2>
-            <h2>{props.order.address}</h2>
-            <h2>{props.order.client.username}</h2>
-    </div>
+    <tr>
+        <td>
+            <Link to={ `/editOrder/${ props.order._id}`}>
+                {props.order.description}
+            </Link>
+        </td>
+        <td>{props.order.status}</td>
+        <td>{props.order.address}</td>
+        <td>{props.order.client.username}</td>
+        <td>
+            <button>Detail</button>
+            <button>New Shipment</button>
+            <button>Change status</button>
+        </td>
+    </tr>
+    
 )
 
 export default OrderItem
